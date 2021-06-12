@@ -83,7 +83,6 @@ const getUsers = async(req,res) =>{
   try {
     const randomUsers = await requestUsers(5);
     const getAllUsers = await User.find({});
-    console.log(getAllUsers);
     res.status(200).send({
       "code" : 200,
       "random Users": randomUsers,
