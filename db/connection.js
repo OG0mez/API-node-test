@@ -1,8 +1,11 @@
 'use strict'
 
 const mongoose = require('mongoose');
-
-const url = `mongodb+srv://admin:P4ssw0rd@api-rest.qpdty.mongodb.net/Users?retryWrites=true&w=majority`;
+require('dotenv').config({
+    path : '../.env'
+});
+const {PASSWORD} = process.env;
+const url = `mongodb+srv://admin:${PASSWORD}@api-rest.qpdty.mongodb.net/Users?retryWrites=true&w=majority`;
 
 const connectionParams={
     useNewUrlParser: true,
