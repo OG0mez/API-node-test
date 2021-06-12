@@ -13,7 +13,7 @@ const getRandomUsers = async(req,res)=>{
         res.status(500).send({
             code : 500,
             message : error.message
-        })
+        });
       }
 }
 
@@ -78,6 +78,24 @@ const deleteUser = async(req,res) =>{
     })
   }
 }
+
+const getUsers = async(req,res) =>{
+  try {
+    const randomUsers = await requestUsers(5);
+    const getAllUsers = await User.find({});
+    console.log(getAllUsers);
+    res.status(200).send({
+      "code" : 200,
+      "random Users": randomUsers,
+      "DB Users"  : getAllUsers
+    });
+  }catch(error) {
+    res.status(500).send({
+      code : 500,
+      message : error.message
+  });
+  }
+}
  
 
 
@@ -85,5 +103,6 @@ const deleteUser = async(req,res) =>{
 module.exports = {
     getRandomUsers,
     addUser,
-    deleteUser
+    deleteUser,
+    getUsers
 }
