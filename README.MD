@@ -16,6 +16,26 @@ PORT = 3000
 
 ## Usage
 
+for adding a new user use the following json schema
+```
+{
+    "id": "sdafaassr",
+    "firstName": "Alex",
+    "lastName": "Simth",
+    "email": "Alex.Smith@example.com",
+    "phoneNumber": "081-309-3369",
+    "picture": "https://randomuser.me/api/portraits/men/73.jpg"
+  }
+```
+
+for deletion just pass the id of the User you want to delete
+```
+{
+ "id": "sdafaassr"
+}
+```
+
+
 ``` npm start```
 
 
