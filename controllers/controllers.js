@@ -1,6 +1,7 @@
 'use strict';
 var axios = require('axios');
-const { json } = require('body-parser');
+const {User} = require('../model/User');
+
 
 
 const getRandomUsers = async(req,res)=>{
@@ -19,7 +20,7 @@ const getRandomUsers = async(req,res)=>{
           return {
             id : value,
             firstName : first,
-            lasName : last,
+            lastName : last,
             email : email,
             phoneNumber : phone,
             picture : large
@@ -36,6 +37,38 @@ const getRandomUsers = async(req,res)=>{
 
 
 
+const addUser = async(req,res) =>{
+    const {id,firstName,lastName,email,phoneNumber,picture} = req.body;
+      if(Object.keys(req.body).length === 0){
+       return res.status(422).send({
+          code : 422,
+          message : "wrong body parameters"
+        });
+      }
+      try {
+        const userExist = await User.findOne({id});
+        if(userExist) return res.status(409).send({
+          code : 409,
+          message : "user already exists"
+        });   
+        const createdUser = new User({id,firstName,lastName,email,phoneNumber,picture});
+        const newUser = await createdUser.save();
+        res.status(201).send({
+          code: 201,
+          newUser,
+          message : "user created!"
+
+        }) 
+      } catch (error) {
+        res.status(500).send({
+          error : 500,
+          message : error.message
+        })
+      }
+}
+
+
 module.exports = {
-    getRandomUsers
+    getRandomUsers,
+    addUser
 }
