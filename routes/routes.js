@@ -1,10 +1,7 @@
 'use strcit';
 
+const {getRandomUsers} = require('../controllers/controllers')  
+
 module.exports = (app) =>{
-    app.get('/',(req,res)=>{
-        res.status(200).send({
-            code : '200',
-            message : 'welcome to express'
-        });
-    })
+    app.get('/random-users',getRandomUsers);
 }
