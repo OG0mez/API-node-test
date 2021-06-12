@@ -10,6 +10,7 @@ and write inside
 
 ``` 
 PORT = 3000 
+PASSWORD = P4ssw0rd
 ```
 
 ```npm install```
