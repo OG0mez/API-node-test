@@ -16,6 +16,10 @@ PORT = 3000
 
 ## Usage
 
+to run 
+``` npm start```
+
+
 for adding a new user use the following json schema
 ```
 {
@@ -36,7 +40,6 @@ for deletion just pass the id of the User you want to delete
 ```
 
 
-``` npm start```
 
 
 ## Notes
