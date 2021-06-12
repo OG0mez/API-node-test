@@ -5,6 +5,13 @@
 
 ## Installation
 
+create a .env file 
+and write inside 
+
+``` 
+PORT = 3000 
+```
+
 ```npm install```
 
 ## Usage
