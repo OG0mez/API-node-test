@@ -14,7 +14,7 @@ const requestUsers = async (results) =>{
         const filteredArray = Object.values(result.data.results).filter(({id})=>{
           return id.value != null
         })
-        const UsersArray = filteredArray.map(({id:{value},name : {first,last}, gender,email,phone,picture:{large}})=>{
+        const UsersArray = filteredArray.map(({id:{value},name : {first,last},email,phone,picture:{large}})=>{
           return {
             id : value,
             firstName : first,
