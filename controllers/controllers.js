@@ -38,21 +38,52 @@ const addUser = async(req,res) =>{
         res.status(201).send({
           code: 201,
           newUser,
-          message : "user created!"
+          message : "user created"
 
         }) 
       } catch (error) {
-        res.status(500).send({
+          res.status(500).send({
           error : 500,
           message : error.message
         })
       }
 }
 
+const deleteUser = async(req,res) =>{
+  const {id} = req.body;
+  if(Object.keys(req.body).legnth ===0 || !id){
+    return res.status(422).send({
+      code : 422,
+      message : "wrong body parameters"
+    })
+  };
+  try{
+   let deletedUser =  await User.findOneAndDelete({id});
+   if(deletedUser){
+      res.status(201).send({
+      code: 201,
+      message : "user deleted"
+    });
+  }else{
+      res.status(404).send({
+      code: 404,
+      message : "user already deleted or doesn't exists"
+    });
+    
+  }
+  }catch(error){
+      res.status(500).send({
+      error : 500,
+      message : error.message
+    })
+  }
+}
+ 
 
 
 
 module.exports = {
     getRandomUsers,
-    addUser
+    addUser,
+    deleteUser
 }
