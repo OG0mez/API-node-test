@@ -1,32 +1,14 @@
 'use strict';
-var axios = require('axios');
-const {User} = require('../model/User');
 
+const {User} = require('../model/User');
+const {requestUsers} = require('../services/axios')
 
 
 const getRandomUsers = async(req,res)=>{
     const results = Number(req.query.results) || 10;
-    const config = {
-        method: 'get',
-        url: `https://randomuser.me/api?results=${results}&inc=gender,name,id,email,phone,picture`,
-        headers: { }
-      };
       try{
-        const result = await axios(config);
-        const filteredArray = Object.values(result.data.results).filter(({id})=>{
-          return id.value != null
-        })
-        const UsersArray = filteredArray.map(({id:{value},name : {first,last}, gender,email,phone,picture:{large}})=>{
-          return {
-            id : value,
-            firstName : first,
-            lastName : last,
-            email : email,
-            phoneNumber : phone,
-            picture : large
-          }
-        }); 
-        res.status(200).send(JSON.stringify(UsersArray));
+        const randomUsers = await requestUsers(results);
+        res.status(200).send(JSON.stringify(randomUsers));
       }catch(error){
         res.status(500).send({
             code : 500,
@@ -66,6 +48,8 @@ const addUser = async(req,res) =>{
         })
       }
 }
+
+
 
 
 module.exports = {
