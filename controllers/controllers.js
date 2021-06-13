@@ -26,7 +26,7 @@ const getRandomUsers = async(req,res)=>{
 
 const addUser = async(req,res) =>{
     const {id,firstName,lastName,email,phoneNumber,picture} = req.body;
-      if(Object.keys(req.body).length === 0){
+      if(Object.keys(req.body).length === 0 || !id || !firstName || !lastName || !email || !phoneNumber || !picture){
        return res.status(422).send({
           code : 422,
           status : "failed",
